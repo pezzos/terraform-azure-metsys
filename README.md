@@ -2,9 +2,11 @@
 
 # Introduction
 
+>Ce processus a été élaboré lors d'un projet chez [Metsys](https://www.metsys.fr/)
+
 Terraform est un outil qui permet de déployer, mettre à jour et détruire des infrastructures à partir de fichiers. On parle d'Infrastructure en Code (Infrastructure as Code, IaC).
 
-Terraform n'a pas besoin d'être installé sur Azure, c'est un outil local (relatif à votre shell bien qu'il puisse être utilisé à travers CloudShell) qui interprète des fichiers YAML pour communiquer avec des fournisseurs (Providers). Azure est un provider mais Terraform peut communiquer avec de nombreux autres providers (officiels : [https://www.terraform.io/docs/providers/index.html](https://www.terraform.io/docs/providers/index.html) / communautaires : [https://www.terraform.io/docs/providers/type/community-index.html](https://www.terraform.io/docs/providers/type/community-index.html)). En fait, Terraform peut communiquer avec tous les services disposant d'une API pour être managés mais aussi d'autres providers locaux (fichiers, générateur de suites aléatoires, heure…).
+Terraform n'a pas besoin d'être installé sur Azure, c'est un outil local (relatif à votre shell bien qu'il puisse être utilisé à travers CloudShell) qui interprète des fichiers YAML pour communiquer avec des fournisseurs (Providers). Azure est un provider mais Terraform peut communiquer avec de nombreux autres providers [officiels](https://www.terraform.io/docs/providers/index.html) et [communautaires](https://www.terraform.io/docs/providers/type/community-index.html)). En fait, Terraform peut communiquer avec tous les services disposant d'une API pour être managés mais aussi d'autres providers locaux (fichiers, générateur de suites aléatoires, heure…).
 
 Terraform créé un état de l'infrastructure dans un fichier. Lorsque vous souhaitez ajouter des ressources, Terraform va calculer la différence entre l'état actuel et l'état souhaité et pourra appliquer les changements pour arriver à l'état souhaité. A l'inverse, pour supprimer ou modifier des ressources, le processus est identique. Attention, si des modifications sont apportées en dehors de Terraform (par exemple à travers le portail Azure), tout sera supprimé lors de la prochaine application de votre configuration si vous n'avez pas intégré les modifications dans vos fichiers Terraform.
 
@@ -42,15 +44,15 @@ Néanmoins, la démarche fonctionne avec les autres providers, sur MacOs et Linu
 
 Le code est mis en forme et les variables que vous avez à modifier sont sous la forme `<VARNAME>` (tout en majuscule, attaché, en anglais et avec des pointes qu'il faut supprimer aussi).
 
-Pour comprendre et modifier certaines commande, il est recommander de lire la documentation sur les requêtes dans Azure CLI : [https://docs.microsoft.com/en-us/cli/azure/query-azure-cli?view=azure-cli-latest](https://docs.microsoft.com/en-us/cli/azure/query-azure-cli?view=azure-cli-latest)
+Pour comprendre et modifier certaines commande, il est recommander de lire la documentation sur [les requêtes dans Azure CLI](https://docs.microsoft.com/en-us/cli/azure/query-azure-cli?view=azure-cli-latest)
 
-Lors de la création de vos ressources, il est conseillé de suivre une convention de nommage (nomenclature). Voici les conseils de Microsoft pour les ressources Azure : [https://docs.microsoft.com/fr-fr/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging](https://docs.microsoft.com/fr-fr/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging)
+Lors de la création de vos ressources, il est conseillé de suivre une convention de nommage (nomenclature). Voici [les conseils de Microsoft pour les ressources Azure](https://docs.microsoft.com/fr-fr/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging)
 
 # Installation de Terraform
 
 Nous commençons par installer Terraform.
 
-Lien vers le téléchargement de Terraform : [https://www.terraform.io/downloads.html](https://www.terraform.io/downloads.html)
+[Lien vers le téléchargement de Terraform](https://www.terraform.io/downloads.html)
 
 Terraform est un exécutable qui ne s'installe pas, il doit simplement être posé dans un dossier inclus dans votre PATH.
 
@@ -67,7 +69,7 @@ Si vous souhaitez utiliser les fichiers mis à disposition sur GitHub ou même c
 
 L'installation est classique.
 
-Lien vers le téléchargement de Git : [https://git-scm.com/download/win](https://git-scm.com/download/win)
+[Lien vers le téléchargement de Git](https://git-scm.com/download/win)
 
 # Installation de Visual Studio Code (facultatif)
 
@@ -75,7 +77,7 @@ Il existe de nombreux éditeurs de code (Notepad++, Sublime Text, Vim…) mais l
 
 L'installation est classique.
 
-Lien vers le téléchargement de Visual Studio Code : [https://code.visualstudio.com/Download](https://code.visualstudio.com/Download)
+[Lien vers le téléchargement de Visual Studio Code](https://code.visualstudio.com/Download)
 
 De plus, n'hésitez pas à installer des extensions pour Azure, Terraform…
 
@@ -85,7 +87,7 @@ Pour profiter des outils en ligne de commande Azure à travers Powershell, il fa
 
 Le téléchargement et l'installation sont classiques.
 
-Lien vers le téléchargement de Azure CLI : [https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest&tabs=azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest&tabs=azure-cli)
+[Lien vers le téléchargement de Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest&tabs=azure-cli)
 
 # Connexion à votre compte Azure
 
@@ -98,7 +100,7 @@ az login
 >_Explication de la commande :_
 >- _az : utiliser des commandes fournies par Azure CLI (ne sera plus détaillée ici)_
 >- _login : indiquer que l'on souhaite se connecter à son compte Azure pour utiliser Azure CLI. Pour se déconnecter, utilisez « az logout »._
->- _Plus d'info sur la commande :_ [https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login)
+>- _Plus d'info sur la commande :_ [lien](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login)
 
 Une page web va s'ouvrir, choisissez le compte lié à l'abonnement que vous souhaitez utiliser.
 
@@ -113,7 +115,7 @@ az account list --output table
 >_Explication de la commande :_
 >- _account list : récupérer la liste des abonnements du compte_
 >- _--output table : affiche sous forme de tableau_
->- _Plus d'info sur la commande : [https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list)_
+>- _Plus d'info sur la commande : [lien](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list)_
 
 Si vous souhaitez en choisir un autre abonnement que celui par défaut :
 ```shell
@@ -122,7 +124,7 @@ az account set --subscription "<SUBSCRIPTIONID>"
 >_Explication de la commande :_
 >- _account set : définir l'abonnement du compte_
 >- _--subscription "<SUBSCRIPTIONID>" : fournir l'id de l'abonnement à définir par défaut_
->- _Plus d'info sur la commande : [https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-set](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-set)_
+>- _Plus d'info sur la commande : [lien](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-set)_
 
 Pour contrôler que vous avez bien sélectionné l'abonnement, vous pouvez récupérer l'id de l'abonnement :
 ```shell
@@ -131,7 +133,7 @@ az account show --query "{abonnement:id, tenant:tenantId}"
 >_Explication de la commande :_
 >- _account show : affiche les détails l'abonnement du compte_
 >- _--query "{abonnement:id, tenant:tenantId}" : filtre la sortie pour afficher 'id' et 'tenantID' et chacun de ces paramètres a un préfix devant pour rendre plus lisible ('abonnement' et 'tenant')_
->- _Plus d'info sur la commande : [https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-show](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-show)_
+>- _Plus d'info sur la commande : [lien](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-show)_
 
 Le tenantId doit correspondre au répertoire (Azure Active Directory). S'il ne correspond pas ou si vous n'avez pas les droits de création sur ce répertoire, créer un nouveau répertoire Azure Active Directory et basculer votre abonnement dessus.
 
@@ -149,7 +151,7 @@ az ad sp create-for-rbac --name="terraform" --role="Owner" --scopes="/subscripti
 >- _--name="terraform" : spécifier le nom du principal de service_
 >- _--role="Owner" : définir le rôle du principal de service à Owner pour qu'il puisse créer et gérer ses services sur cet abonnement_
 >- _--scopes="/subscriptions/<SUBSCRIPTIONID>" : spécifier l'abonnement sur lequel créer ce principal de service_
->- _Plus d'info sur la commande : [https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac)_
+>- _Plus d'info sur la commande : [lien](https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac)_
 
 Cette commande va vous retourner des valeurs qu'il va falloir conserver car certaines n'apparaissent qu'une fois (le password).
 
@@ -166,7 +168,7 @@ az account list-locations --query 'sort\_by([].{Nom:displayName, Code\_region:na
 >_Explication de la commande :_
 >- _account list-locations: lister les régions disponibles pour l'abonnement_
 >- _--query 'sort\_by([].{Nom:displayName, Code\_region:name}, &Nom)' : réduire l'affichage pour n'avoir que 'displayName' et 'name' de toutes les valeurs disponibles ('[].'), mettre des titres aux colonnes avec 'Nom' et 'Code\_region' pour la lisibilité et trier par ordre alphabétique sur 'Nom' (avec &Nom) grâce à 'sort\_by'_
->- _Plus d'info sur la commande : [https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations)_
+>- _Plus d'info sur la commande : [lien](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations)_
 
 # Créer un groupe de ressource pour le fichier d'état Terraform
 
@@ -182,7 +184,7 @@ az group create --name <NAME> --location <REGION>
 >- _group create : créer un nouveau groupe de ressources_
 >- _--name <NAME> : spécifier le nom du groupe de ressources_
 >- _--location <REGION> : spécifier la région dans laquelle créer le groupe de ressources_
->- _Plus d'info sur la commande : [https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az-group-create](https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az-group-create)_
+>- _Plus d'info sur la commande : [lien](https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az-group-create)_
 
 # Créer le stockage pour Terraform
 
@@ -194,8 +196,8 @@ az storage account create --name <NAME> --resource-group <RESOURCEGROUP> --locat
 >- _storage account create : créer un compte de stockage_
 >- _--name <NAME> : spécifier le nom du compte de stockage_
 >- _--resource-group <RESOURCEGROUP> --location <REGION> : specifier le groupe de ressources et la région_
->- _--sku <SKU> : le SKU par défaut est Standard\_RARGS mais vous pouvez spécifier un SKU autre à partir de cette liste ([https://docs.microsoft.com/en-us/rest/api/storagerp/srp\_sku\_types](https://docs.microsoft.com/en-us/rest/api/storagerp/srp_sku_types))_
->- _Plus d'info sur la commande : [https://docs.microsoft.com/en-us/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-create](https://docs.microsoft.com/en-us/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-create)_
+>- _--sku <SKU> : le SKU par défaut est Standard\_RARGS mais vous pouvez spécifier un SKU autre à partir de [cette liste](https://docs.microsoft.com/en-us/rest/api/storagerp/srp_sku_types))_
+>- _Plus d'info sur la commande : [lien](https://docs.microsoft.com/en-us/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-create)_
 
 Avec ce nouveau compte de stockage (<ACCOUNTNAME>), nous pouvons créer un conteneur à l'intérieur.
 ```shell
@@ -207,7 +209,7 @@ az storage container create --name <NAME> --account-name <ACCOUNTNAME> --public-
 >- _--account-name <ACCOUNTNAME> : spécifier le compte de stockage sur lequel créer le conteneur_
 >- _--public-access container : rend le contenu accessible publiquement_
 >- _--resource-group <RESOURCEGROUP> --location <REGION> : spécifier le groupe de ressources et la région_
->- _Plus d'info sur la commande : [https://docs.microsoft.com/en-us/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-create](https://docs.microsoft.com/en-us/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-create)_
+>- _Plus d'info sur la commande : [lien](https://docs.microsoft.com/en-us/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-create)_
 
 Le conteneur est créer, il faut maintenant pouvoir récupérer les identifiants pour se connecter dessus.
 ```shell
@@ -217,7 +219,7 @@ az storage account show-connection-string --name <ACCOUNTNAME> --resource-group 
 >- _storage container show-connection-string : récupérer les chaines de connexion du compte de stockage_
 >- _--name <ACCOUNTNAME> : spécifier le nom du compte de stockage_
 >- _--resource-group <RESOURCEGROUP> : spécifier le groupe de ressources_
->- _Plus d'info sur la commande : [https://docs.microsoft.com/en-us/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-show-connection-string](https://docs.microsoft.com/en-us/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-show-connection-string)_
+>- _Plus d'info sur la commande : [lien](https://docs.microsoft.com/en-us/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-show-connection-string)_
 
 Récupérer et garder la sortie de la commande, nous en aurons besoin pour connecter Terraform.
 
@@ -318,6 +320,20 @@ terraform apply run.tfplan
 Le déploiement peut durer quelques minutes, c'est normal.
 
 Une fois terminé, vous pouvez constater que le groupe de ressources précédemment créé n'est pas modifié, seule la seconde partie du code est déployé (le réseau et sous-réseau, l'interface réseau et la machine virtuelle).
+
+Dans cette seconde partie du main.tf, on constate que certaines valeurs ne sont pas renseignées mais qu’à la place, des variables permettent de récupérer les valeurs de ressources précédemment créées.
+
+```hcl
+resource "azurerm_virtual_network" "example" {
+  name                = "vnet-example-fc-01"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+}
+```
+
+Dans cette exemple, au lieu de spécifier à nouveau la région et le nom du groupe de ressources, on récupère les valeurs `location` et `name` de la ressource `azurerm_resource_group` qui a pour nom `example`.
+
 
 # Destruction des ressources
 
